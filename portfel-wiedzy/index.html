@@ -399,8 +399,9 @@
       font-weight: 600;
       color: var(--text-body);
       text-decoration: none;
-      padding: 8px 14px;
+      padding: 8px 12px;
       border-radius: 9999px;
+      white-space: nowrap;
       transition: var(--transition);
     }
 
@@ -417,6 +418,7 @@
     }
 
     .header-cta {
+      white-space: nowrap;
       padding: 11px 22px;
       font-size: 0.9rem;
     }
@@ -992,6 +994,150 @@
     .why-card p {
       font-size: 0.95rem;
       line-height: 1.7;
+    }
+
+
+    /* =========================================================
+       MENTORING FINANSOWY
+       ========================================================= */
+    .mentoring-section {
+      padding: 112px 0;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .mentoring-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .mentoring-intro p {
+      font-size: 1.02rem;
+      line-height: 1.8;
+      margin-bottom: 18px;
+    }
+
+    .mentoring-intro strong {
+      color: var(--text-heading);
+    }
+
+    .mentoring-path {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 32px 0;
+      counter-reset: path;
+    }
+
+    .mentoring-path li {
+      counter-increment: path;
+      background: var(--bg-warm-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 16px 14px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-heading);
+    }
+
+    .mentoring-path li::before {
+      content: counter(path, decimal-leading-zero);
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--brand-gold);
+      margin-bottom: 6px;
+    }
+
+    .mentoring-result {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 22px 24px;
+      border-radius: var(--radius-md);
+      background: var(--brand-soft-blue);
+      border: 1px solid rgba(43, 108, 176, 0.14);
+    }
+
+    .mentoring-result .icon {
+      font-size: 1.5rem;
+      color: var(--brand-accent);
+      margin-top: 2px;
+    }
+
+    .mentoring-result p {
+      margin: 0;
+      font-size: 0.97rem;
+      font-weight: 500;
+      color: var(--text-heading);
+    }
+
+    .mentoring-card {
+      position: sticky;
+      top: calc(var(--header-height) + 24px);
+      background: var(--bg-warm-light);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 44px 40px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .mentoring-card h3 {
+      font-size: 1.45rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .mentoring-card > p {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .mentoring-subhead {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-bottom: 14px;
+    }
+
+    .mentoring-list {
+      list-style: none;
+      display: grid;
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+
+    .mentoring-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    .mentoring-list .icon {
+      font-size: 1.15rem;
+      margin-top: 3px;
+      color: var(--brand-gold);
+      stroke-width: 2.2;
+    }
+
+    .mentoring-card .mentoring-closing {
+      padding-top: 22px;
+      border-top: 1px dashed var(--border-strong);
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 26px;
     }
 
     /* =========================================================
@@ -1731,18 +1877,12 @@
     /* =========================================================
        RWD
        ========================================================= */
-    @media (max-width: 1080px) {
-      .nav-links a {
-        padding: 8px 10px;
-      }
-    }
-
-    @media (max-width: 992px) {
+    @media (max-width: 1200px) {
       :root {
         --header-height: 68px;
       }
 
-      /* Menu mobilne */
+      /* Menu mobilne (6 pozycji nie mieści się w jednym rzędzie poniżej 1200px) */
       .nav-toggle {
         display: inline-flex;
       }
@@ -1774,8 +1914,10 @@
         border-radius: var(--radius-sm);
         font-size: 1rem;
       }
+    }
 
-      .hero-grid, .contact-grid {
+    @media (max-width: 992px) {
+      .hero-grid, .contact-grid, .mentoring-grid {
         grid-template-columns: 1fr;
         gap: 48px;
       }
@@ -1804,7 +1946,7 @@
         padding: 40px 32px;
       }
 
-      .profile-aside {
+      .profile-aside, .mentoring-card {
         position: static;
       }
 
@@ -1936,6 +2078,19 @@
         grid-template-columns: 1fr;
         gap: 0;
       }
+
+      .mentoring-section {
+        padding: 72px 0;
+      }
+
+      .mentoring-path {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .mentoring-card {
+        padding: 32px 22px;
+        border-radius: var(--radius-md);
+      }
     }
 
     @media (max-width: 560px) {
@@ -1978,7 +2133,7 @@
       }
     }
 
-    @media (max-width: 380px) {
+    @media (max-width: 440px) {
       .header-cta {
         display: none;
       }
@@ -2019,6 +2174,7 @@
     <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol>
     <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h6a4 4 0 0 1 4 4v13a3 3 0 0 0-3-3H2z"/><path d="M22 4h-6a4 4 0 0 0-4 4v13a3 3 0 0 1 3-3h7z"/></symbol>
     <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
     <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></symbol>
   </svg>
@@ -2040,6 +2196,7 @@
         <ul class="nav-links">
           <li><a href="#o-nas">O nas</a></li>
           <li><a href="#dlaczego-my">Podejście</a></li>
+          <li><a href="#mentoring">Mentoring</a></li>
           <li><a href="#oferta">Oferta</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#kontakt">Kontakt</a></li>
@@ -2267,6 +2424,60 @@
             </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- MENTORING FINANSOWY -->
+    <section id="mentoring" class="mentoring-section">
+      <div class="container mentoring-grid">
+        <div class="mentoring-intro reveal">
+          <div class="pill-badge">
+            <svg class="icon" aria-hidden="true"><use href="#i-target"/></svg>
+            Mentoring finansowy
+          </div>
+          <h2 class="section-title">Czym jest mentoring finansowy <span class="serif-accent">i jak wygląda w praktyce?</span></h2>
+          <p>
+            Mentoring finansowy to partnerska współpraca, w której mentor dzieli się wiedzą i doświadczeniem, aby pomóc w wypracowaniu stabilności oraz realizacji zamierzonych celów materialnych. Kluczowym elementem tego procesu jest praca u podstaw: <strong>zmiana utartych schematów myślowych, weryfikacja codziennych nawyków i zrozumienie emocji stojących za wydawaniem pieniędzy.</strong>
+          </p>
+          <p>
+            W odróżnieniu od biernego słuchania wykładów, mentoring opiera się na transferze dobrych praktyk połączonym z pogłębionym dialogiem. Mentor pomaga uporządkować priorytety i wspólnie z podopiecznym tworzy ramy do racjonalnego zarządzania środkami – od konstrukcji realistycznego budżetu domowego, przez redukcję zadłużenia, aż po metodyczne budowanie poduszki finansowej i wprowadzanie strategii pomnażania kapitału.
+          </p>
+
+          <ol class="mentoring-path" aria-label="Etapy pracy w mentoringu">
+            <li>Realistyczny budżet domowy</li>
+            <li>Redukcja zadłużenia</li>
+            <li>Poduszka finansowa</li>
+            <li>Strategia pomnażania kapitału</li>
+          </ol>
+
+          <div class="mentoring-result">
+            <svg class="icon" aria-hidden="true"><use href="#i-target"/></svg>
+            <p>Ostatecznym rezultatem jest odzyskanie kontroli nad budżetem, wykształcenie zdrowego podejścia do pieniędzy oraz pełna samodzielność w podejmowaniu trafnych wyborów ekonomicznych.</p>
+          </div>
+        </div>
+
+        <aside class="mentoring-card reveal reveal-delay-1">
+          <h3>Kto skorzysta na współpracy z mentorem finansowym?</h3>
+          <p>
+            Wsparcie mentora sprawdza się szczególnie wtedy, gdy pojawia się potrzeba przejęcia kontroli nad domowym portfelem, lecz brakuje jasnego planu działania lub merytorycznego punktu odniesienia. Z tego formatu korzystają zarówno osoby dążące do wyjścia ze spirali zobowiązań, jak i te, które dysponują nadwyżkami, ale obawiają się nietrafionych decyzji kapitałowych.
+          </p>
+
+          <p class="mentoring-subhead">Współpraca przynosi wymierne efekty m.in. w sytuacjach takich jak:</p>
+          <ul class="mentoring-list">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>trudności z trzymaniem się planu wydatków i nawykowe zakupy pod wpływem impulsu,</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>reorganizacja budżetu w obliczu przełomowych zmian (np. zmiana ścieżki zawodowej, rozstanie, powiększenie rodziny czy zabezpieczenie przyszłości emerytalnej),</span></li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>chęć zbudowania długoterminowej strategii majątkowej bez presji i chaosu.</span></li>
+          </ul>
+
+          <p class="mentoring-closing">
+            To propozycja dla każdego, kto szuka pragmatycznego wsparcia, sprawdzonych narzędzi oraz stabilnego, świadomego podejścia do swoich zasobów.
+          </p>
+
+          <a href="#kontakt" class="btn btn-primary btn-block" data-topic="mentoring-nawyki">
+            Zapytaj o mentoring
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </a>
+        </aside>
       </div>
     </section>
 
@@ -2607,6 +2818,7 @@
           <ul class="footer-nav">
             <li><a href="#o-nas">O nas</a></li>
             <li><a href="#dlaczego-my">Podejście</a></li>
+            <li><a href="#mentoring">Mentoring finansowy</a></li>
             <li><a href="#oferta">Oferta</a></li>
             <li><a href="#faq">Pytania i odpowiedzi</a></li>
             <li><a href="#kontakt">Kontakt</a></li>
