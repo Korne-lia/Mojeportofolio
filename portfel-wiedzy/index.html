@@ -1753,6 +1753,66 @@
       padding-bottom: 16px;
     }
 
+    .form-status {
+      display: none;
+      margin-top: 18px;
+      padding: 12px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .form-status.is-error {
+      display: block;
+      background: #FBF0EE;
+      border: 1px solid #F0D2CB;
+      color: #8A3A2C;
+    }
+
+    .form-success {
+      text-align: center;
+      padding: 32px 8px 16px;
+      outline: none;
+      animation: cookie-in 0.5s var(--ease);
+    }
+
+    .form-success[hidden] {
+      display: none;
+    }
+
+    .form-success-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      margin-bottom: 22px;
+      font-size: 2rem;
+      color: #FFFFFF;
+      background: linear-gradient(145deg, var(--brand-primary), var(--brand-accent));
+      box-shadow: 0 16px 32px -14px rgba(31, 58, 82, 0.6);
+    }
+
+    .form-success-icon .icon {
+      stroke-width: 2.6;
+    }
+
+    .form-success h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .form-success p {
+      max-width: 420px;
+      margin: 0 auto 12px;
+    }
+
+    .form-success .form-success-note {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
     .rodo-note {
       font-size: 0.75rem;
       line-height: 1.55;
@@ -2948,8 +3008,8 @@
           <h3 class="form-title">Formularz kontaktowy</h3>
           <p class="form-subtitle">Zajmie Ci to mniej niż 2 minuty.</p>
 
-          <!-- UWAGA: podmień TUTAJ_TWOJ_KOD na identyfikator formularza z Formspree -->
-          <form action="https://formspree.io/f/TUTAJ_TWOJ_KOD" method="POST">
+          <!-- Formularz obsługuje Formspree (formspree.io); wysyłka w tle, komunikat po polsku -->
+          <form action="https://formspree.io/f/xdekvwzk" method="POST" id="contact-form">
             <input type="hidden" name="_subject" value="Nowe zapytanie ze strony Portfel Wiedzy">
             <!-- Pułapka na boty: pole niewidoczne dla ludzi -->
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
@@ -2990,6 +3050,8 @@
               </label>
             </div>
 
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+
             <button type="submit" class="btn btn-primary btn-block form-submit">
               Wyślij zapytanie
               <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
@@ -2999,6 +3061,13 @@
               Administratorem danych jest Kornelia Derecka (pełne dane administratora znajdziesz w Polityce prywatności). Dane z formularza przetwarzamy wyłącznie po to, by odpowiedzieć na Twoje zapytanie i przedstawić ofertę, o którą pytasz (art. 6 ust. 1 lit. b i f RODO). Szczegóły, w tym informacje o dostawcy obsługującym formularz, znajdziesz w <a href="/polityka-prywatnosci.html">Polityce prywatności</a>.
             </p>
           </form>
+
+          <div class="form-success" id="form-success" hidden tabindex="-1">
+            <span class="form-success-icon" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>
+            <h3>Dziękujemy za wiadomość!</h3>
+            <p>Twoje zapytanie do nas dotarło. Odezwiemy się e-mailem w ciągu jednego dnia roboczego.</p>
+            <p class="form-success-note">Jeśli nie zobaczysz odpowiedzi, sprawdź folder ze spamem lub napisz do nas na <a href="mailto:kontakt@portfelwiedzy.com">kontakt@portfelwiedzy.com</a>.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -3240,6 +3309,42 @@
       var saved = read();
       if (saved) activate(saved);
       else banner.hidden = false;
+    })();
+
+    // ===== Wysyłka formularza w tle (Formspree) =====
+    (function () {
+      var form = document.getElementById('contact-form');
+      if (!form || !window.fetch) return;
+      var status = document.getElementById('form-status');
+      var success = document.getElementById('form-success');
+      var intro = form.parentNode.querySelectorAll('.form-title, .form-subtitle');
+      var button = form.querySelector('button[type="submit"]');
+      var buttonHtml = button.innerHTML;
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        status.className = 'form-status';
+        status.textContent = '';
+        button.disabled = true;
+        button.textContent = 'Wysyłanie…';
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function (res) {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          form.hidden = true;
+          intro.forEach(function (el) { el.hidden = true; });
+          success.hidden = false;
+          success.focus();
+        }).catch(function () {
+          status.className = 'form-status is-error';
+          status.innerHTML = 'Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę lub napisz do nas na <a href="mailto:kontakt@portfelwiedzy.com">kontakt@portfelwiedzy.com</a>.';
+          button.disabled = false;
+          button.innerHTML = buttonHtml;
+        });
+      });
     })();
   </script>
 
