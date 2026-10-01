@@ -1157,9 +1157,11 @@
 
     .offer-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 28px; /* odstęp w pionie robi miejsce na etykietę wyróżnionej karty */
       align-items: stretch;
+      max-width: 1040px;
+      margin: 0 auto;
     }
 
     .offer-card {
@@ -2677,7 +2679,7 @@
           <!-- 1. AUDYT WYDATKÓW -->
           <article class="offer-card reveal">
             <div>
-              <p class="offer-owner">Prowadzi: Kornelia</p>
+              <p class="offer-owner">Diagnoza finansów</p>
               <h3>Audyt Wydatków</h3>
               <p class="offer-target">Zarabiasz regularnie, a mimo to pod koniec miesiąca nic nie zostaje i nie potrafisz wskazać, gdzie znikają pieniądze.</p>
 
@@ -2704,11 +2706,42 @@
             <a href="#kontakt" class="btn btn-outline btn-block" data-topic="audyt-wydatkow">Zamawiam Audyt Wydatków</a>
           </article>
 
-          <!-- 2. UPADŁOŚĆ -->
-          <article class="offer-card featured reveal reveal-delay-1">
+          <!-- 2. PAKIET MENTORINGU -->
+          <article class="offer-card reveal reveal-delay-1">
+            <div>
+              <p class="offer-owner">Pełny program</p>
+              <h3>Pakiet mentoringu finansowego</h3>
+              <p class="offer-target">Chcesz trwale zmienić swoje podejście do pieniędzy i potrzebujesz wsparcia przez cały proces – od diagnozy po gotowy plan.</p>
+
+              <div class="offer-price">
+                <strong>[CENA] zł</strong>
+                <span>cały pakiet</span>
+              </div>
+
+              <dl class="offer-meta">
+                <dt>Forma</dt><dd>5–6 indywidualnych spotkań online lub w Katowicach</dd>
+                <dt>Czas</dt><dd>około 2–3 miesięcy, spotkania co 2 tygodnie</dd>
+              </dl>
+
+              <p class="offer-subhead">Czego się nauczysz</p>
+              <ul class="offer-features">
+                <li>Jak spokojnie i według planu radzić sobie z trudnymi sytuacjami finansowymi</li>
+                <li>Jak wyznaczać realne cele finansowe i konsekwentnie je realizować</li>
+                <li>Jak podejmować decyzje o pieniądzach w oparciu o wiedzę z psychologii i ekonomii behawioralnej</li>
+                <li>Jak krok po kroku budować trzy filary dobrobytu finansowego: bezpieczeństwo, niezależność i wolność</li>
+                <li>Jak pieniądze wpływają na Twoje emocje i zachowania – i jak odzyskać nad tym kontrolę</li>
+                <li>Jak rozpoznawać pułapki myślenia, które utrudniają budowanie stabilnych finansów</li>
+                <li>Jaki jest Twój indywidualny styl finansowy: zrozumiesz, skąd bierze się Twoja obecna sytuacja, i odkryjesz wewnętrzne konflikty, które blokują realizację celów</li>
+              </ul>
+            </div>
+            <a href="#kontakt" class="btn btn-outline btn-block" data-topic="mentoring-nawyki">Zapisuję się na mentoring</a>
+          </article>
+
+          <!-- 3. UPADŁOŚĆ -->
+          <article class="offer-card featured reveal">
             <span class="featured-pill">Gdy długi przerosły dochód</span>
             <div>
-              <p class="offer-owner">Prowadzi: Weronika</p>
+              <p class="offer-owner">Pomoc prawna</p>
               <h3>Oddłużanie i upadłość konsumencka</h3>
               <p class="offer-target">Masz zaległości, wezwania do zapłaty albo komornika i nie wiesz, czy da się z tego wyjść bez sądu.</p>
 
@@ -2739,8 +2772,8 @@
             </a>
           </article>
 
-          <!-- 3. NARZĘDZIA -->
-          <article class="offer-card reveal reveal-delay-2">
+          <!-- 4. NARZĘDZIA -->
+          <article class="offer-card reveal reveal-delay-1">
             <div>
               <p class="offer-owner">Do samodzielnej pracy</p>
               <h3>Pakiet arkuszy</h3>
@@ -2944,9 +2977,9 @@
               <label for="obszar">Temat zgłoszenia</label>
               <select id="obszar" name="obszar" class="form-input" required>
                 <option value="" disabled selected>Wybierz obszar wsparcia…</option>
-                <option value="audyt-wydatkow">Audyt Wydatków / inflacja stylu życia (Kornelia)</option>
-                <option value="upadlosc-dlugi">Zadłużenie, upadłość konsumencka, windykacja (Weronika)</option>
-                <option value="mentoring-nawyki">Mentoring nawyków i psychologia wydawania</option>
+                <option value="audyt-wydatkow">Audyt Wydatków / inflacja stylu życia</option>
+                <option value="upadlosc-dlugi">Zadłużenie, upadłość konsumencka, windykacja</option>
+                <option value="mentoring-nawyki">Pakiet mentoringu finansowego</option>
                 <option value="szablony-inne">Arkusze budżetowe / inne pytanie</option>
               </select>
             </div>
